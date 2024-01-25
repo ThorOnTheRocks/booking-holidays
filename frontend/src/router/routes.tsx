@@ -1,7 +1,8 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import App from '../App';
-import Layout from '../components/Layouts/Layout';
 import { ReactNode } from 'react';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import Layout from '../components/Layouts/Layout';
+import HomePage from '../pages/Home';
+import Registration from '../pages/Registration';
 
 interface IRoutes {
   path: string;
@@ -11,13 +12,25 @@ interface IRoutes {
 const routes: IRoutes[] = [
   {
     path: '/',
-    element: <App />,
+    element: (
+      <Layout>
+        <HomePage />
+      </Layout>
+    ),
   },
   {
     path: '/search',
     element: (
       <Layout>
         <>Search Page</>
+      </Layout>
+    ),
+  },
+  {
+    path: '/registration',
+    element: (
+      <Layout>
+        <Registration />
       </Layout>
     ),
   },
