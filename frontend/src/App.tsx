@@ -1,9 +1,12 @@
 import Layout from './components/Layouts/Layout';
+import HomePage from './pages/Home';
 
 function App() {
   return (
     <>
-      <Layout>Booking Holidays App</Layout>
+      <Layout>
+        <HomePage />
+      </Layout>
     </>
   );
 }

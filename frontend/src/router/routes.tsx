@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Layout from '../components/Layouts/Layout';
-import HomePage from '../pages/Home';
 import Registration from '../pages/Registration';
+import App from '../App';
 
 interface IRoutes {
   path: string;
@@ -12,11 +12,7 @@ interface IRoutes {
 const routes: IRoutes[] = [
   {
     path: '/',
-    element: (
-      <Layout>
-        <HomePage />
-      </Layout>
-    ),
+    element: <App />,
   },
   {
     path: '/search',
