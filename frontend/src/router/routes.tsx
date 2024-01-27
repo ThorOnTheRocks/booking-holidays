@@ -1,38 +1,27 @@
-import { ReactNode } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Layout from '../components/Layouts/Layout';
 import Registration from '../pages/Registration';
 import App from '../App';
+import HomePage from '../pages/Home';
+import type { RoutesProps } from './routes.types';
 
-interface IRoutes {
-  path: string;
-  element: ReactNode;
-}
-
-const routes: IRoutes[] = [
+const routes: RoutesProps[] = [
   {
     path: '/',
     element: <App />,
-  },
-  {
-    path: '/search',
-    element: (
-      <Layout>
-        <>Search Page</>
-      </Layout>
-    ),
-  },
-  {
-    path: '/registration',
-    element: (
-      <Layout>
-        <Registration />
-      </Layout>
-    ),
-  },
-  {
-    path: '*',
-    element: <Navigate to={'/'} />,
+    children: [
+      {
+        path: '/',
+        element: <HomePage />,
+      },
+      {
+        path: '/registration',
+        element: <Registration />,
+      },
+      {
+        path: '*',
+        element: <Navigate to={'/'} />,
+      },
+    ],
   },
 ];
 
