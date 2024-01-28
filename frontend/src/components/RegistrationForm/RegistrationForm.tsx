@@ -1,12 +1,14 @@
+import { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { RegistrationFormData } from './RegistrationForm.type';
 import { userRegistrationSchema } from '../../schemas/userRegistrationSchema';
 import { useRegisterUserMutation } from '../../services/userService/userService';
+import { RegistrationFormData } from './RegistrationForm.type';
 
 const RegistrationForm = (): JSX.Element => {
-  const [userRegister] = useRegisterUserMutation();
+  const [userRegister, { isSuccess, isError, error }] =
+    useRegisterUserMutation();
   const navigate = useNavigate();
   const {
     register,
@@ -19,15 +21,19 @@ const RegistrationForm = (): JSX.Element => {
   const onSubmit: SubmitHandler<RegistrationFormData> = async (
     data
   ) => {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { confirmPassword, ...userData } = data;
-      await userRegister(userData).unwrap();
-      navigate('/');
-    } catch (error) {
-      console.error('Failed to register:', error);
-    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { confirmPassword, ...userData } = data;
+    await userRegister(userData);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/');
+    }
+    if (isError) {
+      console.error(`Registration error: `, error);
+    }
+  }, [isSuccess, isError, error, navigate]);
 
   return (
     <form
