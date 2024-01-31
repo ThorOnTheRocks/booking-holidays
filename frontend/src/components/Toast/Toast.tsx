@@ -1,6 +1,7 @@
+import { ReactElement } from 'react';
 import type { ToastProps } from './Toast.types';
 
-const Toast = ({ message, status }: ToastProps): JSX.Element => {
+const Toast = ({ message, status }: ToastProps): ReactElement => {
   const styles =
     status === 'SUCCESS'
       ? 'fixed top-4 right-4 z-50 p-4 rounded-md bg-green-600 text-white max-w-md'

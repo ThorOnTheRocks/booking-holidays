@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -6,7 +6,7 @@ import { userRegistrationSchema } from '../../schemas/userRegistrationSchema';
 import { useRegisterUserMutation } from '../../services/userService/userService';
 import { RegistrationFormData } from './RegistrationForm.type';
 
-const RegistrationForm = (): JSX.Element => {
+const RegistrationForm = (): ReactElement => {
   const [userRegister, { isSuccess, isError, error }] =
     useRegisterUserMutation();
   const navigate = useNavigate();

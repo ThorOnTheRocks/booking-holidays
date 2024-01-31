@@ -1,6 +1,7 @@
+import { ReactElement } from 'react';
 import RegistrationForm from '../components/RegistrationForm/RegistrationForm';
 
-const Registration = () => {
+const Registration = (): ReactElement => {
   return (
     <>
       <div className="container mx-auto">
