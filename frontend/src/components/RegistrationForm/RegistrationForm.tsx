@@ -5,11 +5,15 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { userRegistrationSchema } from '../../schemas/userRegistrationSchema';
 import { useRegisterUserMutation } from '../../services/userService/userService';
 import { RegistrationFormData } from './RegistrationForm.type';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { setToast } from '../../state/toastSlice/toastSlice';
 
 const RegistrationForm = (): ReactElement => {
   const [userRegister, { isSuccess, isError, error }] =
     useRegisterUserMutation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -18,22 +22,35 @@ const RegistrationForm = (): ReactElement => {
     resolver: joiResolver(userRegistrationSchema),
   });
 
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/');
+      dispatch(
+        setToast({
+          message: 'Registration successful',
+          status: 'SUCCESS',
+        })
+      );
+    }
+    if (isError) {
+      console.error(`Registration error: `, error);
+      dispatch(
+        setToast({
+          // Need to create ErrorHandling helper
+          message: error?.data.message,
+          status: 'ERROR',
+        })
+      );
+    }
+  }, [isSuccess, isError, error, navigate, dispatch]);
+
   const onSubmit: SubmitHandler<RegistrationFormData> = async (
     data
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...userData } = data;
-    await userRegister(userData);
+    await userRegister(userData).unwrap();
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate('/');
-    }
-    if (isError) {
-      console.error(`Registration error: `, error);
-    }
-  }, [isSuccess, isError, error, navigate]);
 
   return (
     <form

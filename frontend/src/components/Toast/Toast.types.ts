@@ -1,5 +1,5 @@
-export type ToastProps = {
+export type ToastTypes = {
   message: string;
-  status: 'SUCCESS' | 'ERROR';
-  onClose: () => void;
+  status: 'SUCCESS' | 'ERROR' | '';
+  isOpen: boolean;
 };
