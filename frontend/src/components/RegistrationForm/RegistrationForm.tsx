@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from 'react';
+import { ReactElement } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -6,11 +6,10 @@ import { userRegistrationSchema } from '../../schemas/userRegistrationSchema';
 import { useRegisterUserMutation } from '../../services/userService/userService';
 import { RegistrationFormData } from './RegistrationForm.type';
 import { useAppDispatch } from '../../hooks/reduxHooks';
-import { setToast } from '../../state/toastSlice/toastSlice';
+import { setToast } from '../../slices/toastSlice/toastSlice';
 
 const RegistrationForm = (): ReactElement => {
-  const [userRegister, { isSuccess, isError, error }] =
-    useRegisterUserMutation();
+  const [userRegister] = useRegisterUserMutation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -22,34 +21,23 @@ const RegistrationForm = (): ReactElement => {
     resolver: joiResolver(userRegistrationSchema),
   });
 
-  useEffect(() => {
-    if (isSuccess) {
-      navigate('/');
-      dispatch(
-        setToast({
-          message: 'Registration successful',
-          status: 'SUCCESS',
-        })
-      );
-    }
-    if (isError) {
-      console.error(`Registration error: `, error);
-      dispatch(
-        setToast({
-          // Need to create ErrorHandling helper
-          message: error?.data.message,
-          status: 'ERROR',
-        })
-      );
-    }
-  }, [isSuccess, isError, error, navigate, dispatch]);
-
   const onSubmit: SubmitHandler<RegistrationFormData> = async (
     data
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...userData } = data;
-    await userRegister(userData).unwrap();
+    try {
+      await userRegister(userData).unwrap();
+      navigate('/');
+      dispatch(
+        setToast({
+          message: 'User registered successfully',
+          status: 'SUCCESS',
+        })
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

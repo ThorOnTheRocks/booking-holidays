@@ -3,7 +3,7 @@ import {
   useAppSelector,
   useAppDispatch,
 } from '../../hooks/reduxHooks';
-import { clearToast } from '../../state/toastSlice/toastSlice';
+import { clearToast } from '../../slices/toastSlice/toastSlice';
 
 const Toast = (): ReactElement | null => {
   const toast = useAppSelector((state) => state.toast);
