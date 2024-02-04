@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ToastTypes } from '../../components/Toast/Toast.types';
+import { ToastTypes } from '../../types/Toast.types';
 
 const initialState: ToastTypes = {
   message: '',
@@ -11,13 +11,7 @@ export const toastSlice = createSlice({
   name: 'toast',
   initialState,
   reducers: {
-    setToast: (
-      state,
-      action: PayloadAction<{
-        message: string;
-        status: 'SUCCESS' | 'ERROR';
-      }>
-    ) => {
+    setToast: (state, action: PayloadAction<ToastTypes>) => {
       state.message = action.payload.message;
       state.status = action.payload.status;
       state.isOpen = true;

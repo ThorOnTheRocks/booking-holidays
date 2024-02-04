@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userRegisterApi } from './services/userService/userService';
 import toastReducer from './slices/toastSlice/toastSlice';
-import { rtkQueryErrorLogger } from './middlewares/errorLogger';
 
 export const store = configureStore({
   reducer: {
@@ -10,9 +9,7 @@ export const store = configureStore({
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(userRegisterApi.middleware)
-      .concat(rtkQueryErrorLogger),
+    getDefaultMiddleware().concat(userRegisterApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
