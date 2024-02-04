@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import type { HeaderProps } from './Header.types';
+import { ReactElement } from 'react';
 
-const Header = ({ title }: HeaderProps): JSX.Element => {
+const Header = ({ title }: HeaderProps): ReactElement => {
   return (
     <div className="bg-blue-800 py-6">
       <div className="container mx-auto flex justify-between">

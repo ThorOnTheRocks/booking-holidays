@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import Hero from '../components/Hero/Hero';
 
 export type HomePageTypes = {
   children?: ReactNode;
 };
 
-const HomePage = ({ children }: HomePageTypes): JSX.Element => {
+const HomePage = ({ children }: HomePageTypes): ReactElement => {
   return (
     <>
       <Hero />

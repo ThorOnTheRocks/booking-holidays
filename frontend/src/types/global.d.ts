@@ -16,3 +16,7 @@ export type AuthResponse = {
   };
   token: string;
 };
+
+export interface ApiErrorResponse {
+  message: string;
+}
