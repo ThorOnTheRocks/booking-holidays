@@ -3,10 +3,10 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { userRegistrationSchema } from '../../schemas/userRegistrationSchema';
-import { useRegisterUserMutation } from '../../services/userService/userService';
+import { useRegisterUserMutation } from '../../features/users/userService';
 import { RegistrationFormData } from './RegistrationForm.type';
 import { useAppDispatch } from '../../hooks/reduxHooks';
-import { setToast } from '../../slices/toastSlice/toastSlice';
+import { setToast } from '../../features/toast/toastSlice';
 
 const RegistrationForm = (): ReactElement => {
   const [userRegister, { isSuccess, isError, error }] =

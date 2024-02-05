@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userRegisterApi } from './services/userService/userService';
-import toastReducer from './slices/toastSlice/toastSlice';
+import { userRegisterApi } from '../features/users/userService';
+import toastReducer from '../features/toast/toastSlice';
 
 export const store = configureStore({
   reducer: {
