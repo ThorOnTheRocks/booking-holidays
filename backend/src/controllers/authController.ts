@@ -49,8 +49,6 @@ export const getToken = (req: Request, res: Response) => {
 };
 
 export const logout = (req: Request, res: Response) => {
-  res.cookie('auth_token', '', {
-    expires: new Date(0),
-  });
-  res.send();
+  res.clearCookie('auth_token');
+  res.json({ message: 'Logout successful' });
 };
