@@ -3,7 +3,7 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
 
-import type { LoginRequest, AuthResponse } from '../../types/global';
+import type { AuthResponse, LoginRequest } from '../../types/global';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -15,10 +15,21 @@ export const authApi = createApi({
       query: (credentials) => ({
         url: 'auth/login',
         method: 'POST',
+        credentials: 'include',
         body: credentials,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
+    validateToken: builder.query<AuthResponse, string>({
+      query: () => ({
+        url: 'auth/validate-token',
+        method: 'GET',
+        credentials: 'include',
       }),
     }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useValidateTokenQuery } = authApi;

@@ -5,10 +5,15 @@ import { useLoginMutation } from '../../../features/auth/authService';
 import type { LoginFormData } from './LoginForm.types';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useNavigate } from 'react-router-dom';
+import { setToast } from '../../../features/toast/toastSlice';
+import { useAppDispatch } from '../../../hooks/reduxHooks';
+import { setUser } from '../../../features/users/userSlice';
 
 const LoginForm = () => {
-  const [login, { isSuccess }] = useLoginMutation();
+  const [login, { data, isSuccess, isError, error }] =
+    useLoginMutation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -19,16 +24,35 @@ const LoginForm = () => {
   });
 
   const onSubmit: SubmitHandler<LoginFormData> = async (formData) => {
-    console.log('form data: ', formData);
     await login(formData).unwrap();
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      console.log('success');
+    if (isSuccess && data) {
+      dispatch(
+        setToast({
+          message: `Welcome back, ${data?.firstName} 👋 `,
+          isOpen: true,
+          status: 'SUCCESS',
+        })
+      );
+      dispatch(setUser({ ...data }));
       navigate('/');
     }
-  }, [isSuccess, navigate]);
+    if (isError && error) {
+      const errorMessage =
+        'data' in error
+          ? (error.data as { message: string }).message
+          : 'Login failed';
+      dispatch(
+        setToast({
+          message: errorMessage,
+          status: 'ERROR',
+          isOpen: true,
+        })
+      );
+    }
+  }, [isSuccess, navigate, dispatch, data, isError, error]);
 
   return (
     <section className="m-20">

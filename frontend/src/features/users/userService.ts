@@ -14,8 +14,12 @@ export const userRegisterApi = createApi({
     registerUser: builder.mutation<AuthResponse, User>({
       query: (data) => ({
         url: 'users/register',
+        credentials: 'include',
         method: 'POST',
         body: data,
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }),
     }),
   }),
