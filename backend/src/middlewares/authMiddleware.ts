@@ -19,7 +19,7 @@ export const verifyToken = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies['aut_token'];
+  const token = req.cookies['auth_token'];
   if (!token) {
     return res
       .status(StatusCodes.UNAUTHORIZED)

@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "newsletter-app-server",
   "main": ".src/index.ts",
   "type": "module",
   "scripts": {
