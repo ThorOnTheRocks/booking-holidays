@@ -1,12 +1,12 @@
-# Booking Application
+# Newsletter Application
 
-Booking Application is a full-stack MERN (MongoDB, Express.js, React, Node.js) application designed to manage bookings for various services. This application allows users to register, login, and manage their bookings efficiently.
+Newsletter Application is a full-stack MERN (MongoDB, Express.js, React, Node.js) application designed to manage bookings for various services. This application allows users to register, login, and manage their bookings efficiently.
 
 ## Features
 
 - User authentication (register/login) with JWT.
 - Secure password handling with bcrypt.
-- Create, read, update, and delete (CRUD) operations for bookings.
+- Create, read, update, and delete (CRUD) operations for subscriptions.
 - Responsive frontend design with React.
 
 ## Installation
