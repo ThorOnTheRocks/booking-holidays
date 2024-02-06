@@ -22,14 +22,14 @@ export const authApi = createApi({
         },
       }),
     }),
-    validateToken: builder.query<AuthResponse, string>({
+    logout: builder.mutation<void, void>({
       query: () => ({
-        url: 'auth/validate-token',
-        method: 'GET',
+        url: 'auth/logout',
+        method: 'POST',
         credentials: 'include',
       }),
     }),
   }),
 });
 
-export const { useLoginMutation, useValidateTokenQuery } = authApi;
+export const { useLoginMutation, useLogoutMutation } = authApi;

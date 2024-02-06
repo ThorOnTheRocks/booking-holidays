@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
 import type { HeaderProps } from './Header.types';
 import { ReactElement } from 'react';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../hooks/reduxHooks';
-import { clearUser } from '../../features/users/userSlice';
+import { useAppSelector } from '../../hooks/reduxHooks';
+import SignOutButton from '../Signout/SignOutButton';
 
 const Header = ({ title }: HeaderProps): ReactElement => {
   const user = useAppSelector((state) => state.user.userInfo);
-  const dispatch = useAppDispatch();
 
   return (
     <div className="bg-blue-800 py-6">
@@ -18,13 +14,7 @@ const Header = ({ title }: HeaderProps): ReactElement => {
           <Link to={'/'}>{title}</Link>
         </span>
         {user ? (
-          <Link
-            onClick={() => dispatch(clearUser())}
-            to="/login"
-            className="flex bg-white items-center text-blue-600 px-3 font-bold hover:bg-gray-100"
-          >
-            Sign Out
-          </Link>
+          <SignOutButton />
         ) : (
           <Link
             to="/login"
