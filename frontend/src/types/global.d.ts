@@ -6,6 +6,11 @@ export type User = {
   lastName: string;
 };
 
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
+
 export type AuthResponse = {
   user: {
     id: string;

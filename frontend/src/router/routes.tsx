@@ -3,6 +3,7 @@ import Registration from '../pages/Registration';
 import App from '../App';
 import HomePage from '../pages/Home';
 import type { RoutesProps } from './routes.types';
+import Login from '../pages/Login';
 
 const routes: RoutesProps[] = [
   {
@@ -16,6 +17,10 @@ const routes: RoutesProps[] = [
       {
         path: '/registration',
         element: <Registration />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
       {
         path: '*',
