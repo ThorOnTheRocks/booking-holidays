@@ -33,11 +33,24 @@ export const login = async (req: Request, res: Response) => {
       secure: process.env.NODE_ENV === 'production',
       maxAge: 86400000,
     });
-    res.status(StatusCodes.OK).json({ userId: user._id });
+    res
+      .status(StatusCodes.OK)
+      .json({ userId: user._id, firstName: user.firstName });
   } catch (error) {
     console.log(error);
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: 'Something went wrong!' });
   }
+};
+
+export const getToken = (req: Request, res: Response) => {
+  res.status(StatusCodes.OK).json({ userId: req.userId });
+};
+
+export const logout = (req: Request, res: Response) => {
+  res.cookie('auth_token', '', {
+    expires: new Date(0),
+  });
+  res.send();
 };
