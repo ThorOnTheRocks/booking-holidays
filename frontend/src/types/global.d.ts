@@ -1,16 +1,17 @@
-export type User = {
-  email: string;
-  password: string;
+export type UserBaseInfo = {
+  id: string;
   username: string;
   firstName: string;
   lastName: string;
+  email: string;
 };
 
-export type UserInfo = {
-  email: string;
-  username: string;
-  firstName: string;
-  lastName: string;
+export type UserRegistration = UserBaseInfo<Omit, 'id'> & {
+  password: string;
+};
+
+export type AuthResponse = UserBaseInfo & {
+  token: string;
 };
 
 export type LoginRequest = {
@@ -18,15 +19,9 @@ export type LoginRequest = {
   password: string;
 };
 
-export type AuthResponse = {
-  id: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  token: string;
-};
-
+interface ValidateTokenResponse {
+  userId: string;
+}
 export interface ApiErrorResponse {
   message: string;
 }

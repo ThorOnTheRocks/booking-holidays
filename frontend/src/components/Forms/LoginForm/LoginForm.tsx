@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { loginValidationSchema } from '../../../schemas/loginValidationSchema';
-import { useLoginMutation } from '../../../features/auth/authService';
+import { useLoginMutation } from '../../../services/authApi';
 import type { LoginFormData } from './LoginForm.types';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useNavigate } from 'react-router-dom';

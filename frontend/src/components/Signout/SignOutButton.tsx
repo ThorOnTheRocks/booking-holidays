@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLogoutMutation } from '../../features/auth/authService';
+import { useLogoutMutation } from '../../services/authApi';
 import { setToast } from '../../features/toast/toastSlice';
 import { clearUser } from '../../features/users/userSlice';
 import { useAppDispatch } from '../../hooks/reduxHooks';

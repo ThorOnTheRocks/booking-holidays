@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import type { UserInfo } from '../../types/global';
+import type { UserBaseInfo } from '../../types/global';
 
 type UserState = {
-  userInfo: UserInfo | null;
+  userInfo: UserBaseInfo | null;
   isLoggedIn: boolean;
 };
 
@@ -15,7 +15,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserInfo>) => {
+    setUser: (state, action: PayloadAction<UserBaseInfo>) => {
       state.userInfo = action.payload;
       state.isLoggedIn = true;
     },
