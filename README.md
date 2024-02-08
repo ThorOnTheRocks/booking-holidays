@@ -15,7 +15,7 @@ Clone the repository and install dependencies.
 
 ```bash
 git clone https://github.com/your-username/booking-app.git
-cd booking-app
+cd newsletter-app
 ```
 
 ## Backend Setup
