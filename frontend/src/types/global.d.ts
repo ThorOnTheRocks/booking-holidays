@@ -14,11 +14,6 @@ export type AuthResponse = UserBaseInfo & {
   token: string;
 };
 
-export type LoginRequest = {
-  email: string;
-  password: string;
-};
-
 interface ValidateTokenResponse {
   userId: string;
 }

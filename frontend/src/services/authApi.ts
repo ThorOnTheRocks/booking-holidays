@@ -3,11 +3,11 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
 import type {
-  LoginRequest,
   AuthResponse,
   ValidateTokenResponse,
   UserRegistration,
 } from '../types/global';
+import type { LoginFormData } from '../components/Forms/LoginForm/LoginForm.types';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -16,7 +16,7 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   tagTypes: ['Auth', 'User'],
   endpoints: (builder) => ({
-    login: builder.mutation<AuthResponse, LoginRequest>({
+    login: builder.mutation<AuthResponse, LoginFormData>({
       query: (credentials) => ({
         url: 'auth/login',
         method: 'POST',
